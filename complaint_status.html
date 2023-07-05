@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Complaint Status</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <h1>Complaint Status</h1>
+        <div id="complaintStatus"></div>
+    </div>
+
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+    <script>
+        // Fetch complaint status from the server
+        fetch('/complaints')
+            .then(response => response.json())
+            .then(data => {
+                // Display complaint status on the page
+                const complaintStatusElement = document.getElementById('complaintStatus');
+                const complaintStatusHTML = data.map(complaint => `<p>${complaint.status}</p>`).join('');
+                complaintStatusElement.innerHTML = complaintStatusHTML;
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+    </script>
+</body>
+</html>
